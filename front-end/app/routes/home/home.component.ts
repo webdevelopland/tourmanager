@@ -1,50 +1,48 @@
 import { Component } from "@angular/core";
 import { Title } from "@angular/platform-browser";
-import { HttpService } from "@/services/http.service";
 import { not } from "libraryjs";
 import { Routing } from "./Routing";
+import { DataService } from "./data.service";
 
 @Component({
-  templateUrl: "./home.html"
+  templateUrl: "./home.html",
+  providers: [ DataService ] //load data from server
 })
 export class HomePageComponent {
-  radio:string;
-  selectFrom:any;
-  selectTo:any;
+  radio:string; //radio html
+  selectFrom:any; //Arrival in html select
+  selectTo:any; //Departure in html select
 
-  visible:boolean = false;
-  route:Array<any>;
-  total:any;
+  visible:boolean = false; //search results visible/hiiden
+  route:Array<any>; //the search results
+  total:any; //total sum of results
 
-  routing:Routing = new Routing();
+  routing:Routing = new Routing(); //<-- base code here
 
   constructor(
     public title:Title,
-    public http:HttpService
+    private data:DataService
   ) {
     this.title.setTitle("Tour Manager");
 
-    this.ini();
+    this.ini(); //initialize start variable
 
-    this.http.get({
-      url: "/db",
-      callback: (res) => {
-        if (not(res)) return;
-        if (not(res.currency)) return;
-        this.routing.load(res);
-      }
+    this.data.load((res) => {
+      this.routing.load(res); //<-- launch here
     });
   }
 
+  //initialize start variable
   ini() {
     this.selectFrom = null;
     this.selectTo = null;
     this.radio = "radio-fast";
   }
 
+  //When html button "Search" is pushed
   search() {
     if (not(this.selectFrom) || not(this.selectTo)) {
-      alert ("Specify path");
+      alert ("Specify path, please");
       return;
     }
     if (this.selectFrom === this.selectTo) {
@@ -52,7 +50,7 @@ export class HomePageComponent {
       return;
     }
 
-    this.routing.refresh();
+    this.routing.refresh(); //let's refresh vars after last search
     var routing;
     if (this.radio === "radio-fast") {
       routing = this.routing.fastStart(this.selectFrom, this.selectTo);
@@ -61,7 +59,7 @@ export class HomePageComponent {
       routing = this.routing.cheapStart(this.selectFrom, this.selectTo);
     }
     if (routing.error) {
-      alert("путь проложить невозможно, увы");
+      alert("No available flights, sorry");
       return;
     }
 
@@ -73,14 +71,15 @@ export class HomePageComponent {
       };
       return `${zeroplus(h)}:${zeroplus(m)}`;
     };
+
+    //Data for html
     this.total = {
       duration: convertTime(routing.min),
       cost: routing.price+"€"
     };
 
     var route = [];
-    for(let path of routing.route) {
-      
+    for(let path of routing.route) {   
       route.push({
         from: path.from,
         to: path.to,
@@ -88,12 +87,12 @@ export class HomePageComponent {
         about: `${path.transport} ${path.code} for ${convertTime(path.min)}`,
       });
     }
-    route = route.reverse();
-    this.route = route;
+    this.route = route.reverse();
 
     this.visible = true;
   }
 
+  //When html button "reset" is pushed
   reset() {
     this.visible = false;
     this.ini();

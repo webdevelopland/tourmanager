@@ -15,12 +15,10 @@ import { NavComponent } from "@/components/nav/nav.component";
 
 // —————————————————————— Routes ——————————————————————
 import { HomePageComponent } from "@/routes/home/home.component";
-import { SecondPageComponent } from "@/routes/second/second.component";
 import { Error404PageComponent } from "@/routes/error404/error404.component";
 
 const appRoutes: Routes = [
   { path: "",         component: HomePageComponent },
-  { path: "second",   component: SecondPageComponent },
   { path: "**",       component: Error404PageComponent }
 ];
 
@@ -36,7 +34,6 @@ import { HttpService } from "@/services/http.service";
 
     // Routes:
     HomePageComponent,
-    SecondPageComponent,
     Error404PageComponent
   ],
   imports: [

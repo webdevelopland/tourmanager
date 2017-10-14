@@ -1,12 +1,12 @@
 {
   "name": "tourmanager",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Best way",
   "scripts": {
     "start": "node express.js",
     "serve": "ng serve --proxy-config front-end/dev/express.proxy.json",
     "build": "ng build --prod --aot",
-    "test": "ng test",
+    "test": "ng test --proxy-config front-end/dev/express.proxy.json",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "scss": "gulp scss-auto",
