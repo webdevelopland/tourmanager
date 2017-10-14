@@ -1,21 +1,16 @@
 import { TestBed, async } from '@angular/core/testing';
-import { HomePageComponent } from './home.component';
-import { BrowserModule, Title } from "@angular/platform-browser";
+import { SearchComponent } from './search.component';
+import { BrowserModule, Title, By  } from "@angular/platform-browser";
 import { HttpModule, JsonpModule, Http, ConnectionBackend, RequestOptions } from "@angular/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatCardModule, MatRadioModule, MatSelectModule, MatButtonModule } from "@angular/material";
 import { HttpService } from "@/services/http.service";
 
-import { ResultsComponent } from "./results/results.component";
-import { SearchComponent } from "./search/search.component";
-
-describe('HomePageComponent', () => {
+describe('SearchComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        HomePageComponent,
-        ResultsComponent,
         SearchComponent
       ],
       imports: [
@@ -30,13 +25,23 @@ describe('HomePageComponent', () => {
       ]
     }).compileComponents();
   });
-  it('should create HomePageComponent', () => {
-    const fixture = TestBed.createComponent(HomePageComponent);
+  it('should create SearchComponent', () => {
+    const fixture = TestBed.createComponent(SearchComponent);
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
   });
-  it(`should have title 'Tour Manager'`, async(() => {
-    var userService = TestBed.get(Title);
-    expect(userService.getTitle()).toBe("Tour Manager");
+  it('should refresh vars', () => {
+    const fixture = TestBed.createComponent(SearchComponent);
+    const app = fixture.debugElement.componentInstance;
+    app.refresh();
+    expect(app.selectFrom).toEqual(null);
+    expect(app.selectTo).toEqual(null);
+    expect(app.radio).toEqual("radio-fast");
+  });
+  it('should search tours', async(() => {
+    const fixture = TestBed.createComponent(SearchComponent);
+    const app = fixture.debugElement.componentInstance;
+    app.search();
+    expect(app).toBeTruthy();
   }));
 });

@@ -1,8 +1,9 @@
-import { Routing } from "./Routing";
+import { Routing } from "./routing";
 
 describe("Routing", () => {
+  var routing;
   beforeEach(() => {
-    this.routing = new Routing();
+    routing = new Routing();
     var json = {
       deals: [
         {
@@ -13,9 +14,17 @@ describe("Routing", () => {
         }
       ]
     };
-    this.routing.load(json);
+    routing.load(json);
   });
-  it("Routing is working", () => {
-    expect(this.routing.towns.length).toBe(2);
+  it("should works", () => {
+    expect(routing).toBeTruthy();
+  });
+  it("should cheap search", () => {
+    var result = routing.cheapStart("London", "Paris");
+    expect(result).toBeTruthy();
+  });
+  it("should fast search", () => {
+    var result = routing.fastStart("London", "Paris");
+    expect(result).toBeTruthy();
   });
 });

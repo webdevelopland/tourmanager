@@ -28,6 +28,12 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false
+    singleRun: false,
+    proxies: {
+      '/db': 'http://localhost:4000/db'
+    },
+    files: [
+      { pattern: './front-end/app/styles/css/app.css' }
+    ]
   });
 };

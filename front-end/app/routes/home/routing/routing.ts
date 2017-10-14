@@ -10,8 +10,8 @@ export class Routing {
   fastMap:Array<Array<any>>; //map for fastest way
   cheapMap:Array<Array<any>>; //map for cheapest way
   load(res:any) { // <-- launch here
-    this.createPaths();
     this.saveDeals(res.deals);
+    this.createPaths();
   }
   refresh() { //refresh vars after recent search
     this.createPaths();
