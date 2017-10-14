@@ -11,10 +11,15 @@ export class Routing {
   cheapMap:Array<Array<any>>; //map for cheapest way
   load(res:any) { // <-- launch here
     this.createPaths();
-    this.createMaps(res.deals);
+    this.saveDeals(res.deals);
   }
   refresh() { //refresh vars after recent search
     this.createPaths();
+  }
+
+  saveDeals(deals) { //Save deals in vars
+    this.createTowns(deals);
+    this.createMaps(deals); 
   }
   createPaths() { //empty pattern for future path
     this.path = {};
@@ -27,8 +32,8 @@ export class Routing {
       };
     }
   }
-  createMaps(deals) { //Creating maps
-    //But towns first
+  createTowns(deals) {
+    //List of all towns
     var towns = [];
     var add = (arr:Array<any>, value:any) => {
       const i = arr.indexOf(value);
@@ -40,9 +45,14 @@ export class Routing {
       add(towns, deal.arrival);
     }
     this.towns = towns;
-    //done. Now we have list of all towns. Isn't it great?
+  }
 
-    //Yeah. Those are maps
+  createMaps(deals) {
+    var fullMap = this.iniMaps();
+    fullMap = this.convertDealsIntoMap(deals, fullMap);
+    this.sortMap(fullMap);
+  }
+  iniMaps() { //Let's create empty maps first
     this.fastMap = [];
     this.cheapMap = [];
     var fullMap = [];
@@ -68,10 +78,11 @@ export class Routing {
       
       this.N[this.towns[i]] = i; //the lib. I told about it there from above
     }
-    
-    //
+
+    return fullMap;
+  }
+  convertDealsIntoMap(deals, fullMap) {
     // Important part. Data from json is converted in a map
-    //
     for(let deal of deals) {
       var i = this.N[deal.arrival];
       var j = this.N[deal.departure];
@@ -85,7 +96,10 @@ export class Routing {
         transport: deal.transport
       });
     }
-    
+
+    return fullMap;
+  }
+  sortMap(fullMap) {
     //When basic map has been created. We can sort it and create cheap map and fast map.
     for(let i in fullMap) {
       for(let j in fullMap[i]) {
@@ -125,34 +139,28 @@ export class Routing {
     });
   }
   private start(from, to, map, handler) {
-    //
     // Ok. Now serios. It's the most main part of all app
     // The path is searched here
-    //
     this.path[from].size = 0; //Path at start has zero length
-
     var error = true; //If we won't able to find destination, error remain true
-    var open = (n) => {
-      //Oh oh! Recursive function!
-      this.path[this.towns[n]].closed = true; //If we visited a town, no need to return
 
-      var line = new Arc(); //Don't worry. It's just associative array
+    //Oh oh! Recursive function!
+    var open = (n) => {
+      this.path[this.towns[n]].closed = true; //If we visited a town, no need to return
+      var line = new Arc(); //Don't worry. It's just an associative array
       for(let j in map[n]) {
         //Let's see all branches of the graph
         if (this.path[this.towns[j]].closed) continue; //that's mean we already was here. No need to calc anymore
         if (not(map[n][j])) continue; //No branch. It's ok
-
         var cell = map[n][j];
         var current = this.path[this.towns[n]].size + handler(cell);
-
         //If new path has less size (price or duration) we choose it
         if (this.path[this.towns[j]].size === undefined || this.path[this.towns[j]].size > current) {
           this.path[this.towns[j]].size = current;
           this.path[this.towns[j]].cell = cell;
           this.path[this.towns[j]].from = n;
         }
-
-        line.add(j, current.default);
+        line.add(j, current);
       }
       //Choose most shortest
       line.sort((a, b) => {
@@ -172,13 +180,17 @@ export class Routing {
     };
     open( this.N[from] );
 
+    return this.buildFinalPath(to, error);
+  }
+  
+  buildFinalPath(to, error) {
     if (error) {
       return {
         error: error
       };
     }
     
-    //Work is done. Time to return the result.
+    //Let's run most shortest path and get the result
     var route = [];
     var price = 0;
     var min = 0;

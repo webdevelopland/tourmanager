@@ -1,0 +1,29 @@
+<div id="results" *ngIf="visible">
+  <mat-card class="path" *ngFor="let path of route">
+    <div class="title">
+      <span>{{path.from}} > {{path.to}}</span>
+    </div>
+    <div class="price">
+      <span>{{path.cost}}</span>
+    </div>
+    <div class="about">
+      <span>{{path.about}}</span>
+    </div>
+  </mat-card>
+
+  <mat-card class="total">
+    <div class="title">
+      <span>Total</span>
+    </div>
+    <div class="duration">
+      <span>{{total.duration}}</span>
+    </div>
+    <div class="price">
+      <span>{{total.cost}}</span>
+    </div>
+  </mat-card>
+
+  <div class="button">
+    <button mat-raised-button color="primary" (click)="reset()">Reset</button>
+  </div>
+</div>

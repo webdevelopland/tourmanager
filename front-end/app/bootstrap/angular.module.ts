@@ -12,6 +12,8 @@ import "hammerjs";
 // —————————————————————— Components ——————————————————————
 import { AngularComponent } from "@/components/angular/angular.component";
 import { NavComponent } from "@/components/nav/nav.component";
+import { ResultsComponent } from "@/routes/home/results/results.component";
+import { SearchComponent } from "@/routes/home/search/search.component";
 
 // —————————————————————— Routes ——————————————————————
 import { HomePageComponent } from "@/routes/home/home.component";
@@ -31,6 +33,8 @@ import { HttpService } from "@/services/http.service";
     // Components
     AngularComponent,
     NavComponent,
+    ResultsComponent,
+    SearchComponent,
 
     // Routes:
     HomePageComponent,

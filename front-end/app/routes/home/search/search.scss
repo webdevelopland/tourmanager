@@ -1,0 +1,19 @@
+#search {
+  >mat-card {
+    margin-bottom: 30px;
+    >div>.from-field {
+      margin-right: 60px;
+    }
+
+    >.radio {
+      margin-top: 10px;
+      .cheap-radio {
+        margin-right: 40px;
+      }
+    }
+
+    >.button {
+      margin-top: 30px;
+    }
+  }
+}

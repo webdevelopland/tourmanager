@@ -1,0 +1,32 @@
+<div id="search">
+  <mat-card>
+    <div>
+      <mat-form-field class="from-field">
+        <mat-select placeholder="From" [(ngModel)]="selectFrom" name="from">
+          <mat-option *ngFor="let town of routing.towns" [value]="town">
+            {{ town }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="To" [(ngModel)]="selectTo" name="to">
+          <mat-option *ngFor="let town of routing.towns" [value]="town">
+            {{ town }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="radio">
+      <mat-radio-group [(ngModel)]="radio">
+        <mat-radio-button value="radio-cheap" class="cheap-radio">Cheapest</mat-radio-button>
+        <mat-radio-button value="radio-fast">Fastest</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="button">
+      <button mat-raised-button color="primary" (click)="search()">Search</button>
+    </div>
+  </mat-card>
+</div>
