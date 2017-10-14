@@ -1,0 +1,8 @@
+@include mat-core();
+
+$material-primary: mat-palette($mat-cyan);
+$material-accent:  mat-palette($mat-blue, 700, 600, 800);
+$material-warn:    mat-palette($mat-red, 400);
+
+$material-theme: mat-light-theme($material-primary, $material-accent, $material-warn);
+@include angular-material-theme($material-theme);

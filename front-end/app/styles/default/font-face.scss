@@ -1,0 +1,23 @@
+// —————————————————————— font-face ——————————————————————
+// @font-face {
+//   font-family: opensans;
+//   src: url("/file/fonts/opensans/opensans.ttf");
+//   font-style: normal;
+// }
+// @font-face {
+//   font-family: quicksand;
+//   src: url("/file/fonts/quicksand/quicksand.otf");
+//   font-style: normal;
+// }
+// @font-face {
+//   font-family: ubuntu;
+//   src: url("/file/fonts/ubuntu/ubuntu.ttf");
+//   font-style: normal;
+// }
+
+// —————————————————————— Fonts ——————————————————————
+// $opensans:        opensans, Arial;
+// $quicksand:       quicksand, Arial;
+// $ubuntu:          ubuntu, Arial;
+
+$default-font: Arial;

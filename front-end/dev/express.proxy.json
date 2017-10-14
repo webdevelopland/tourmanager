@@ -1,0 +1,26 @@
+{
+  "/node_modules": {
+    "target": "http://localhost:4000",
+    "secure": false
+  },
+  "/bower_components": {
+    "target": "http://localhost:4000",
+    "secure": false
+  },
+  "/ajax": {
+    "target": "http://localhost:4000",
+    "secure": false
+  },
+  "/file": {
+    "target": "http://localhost:4000",
+    "secure": false
+  },
+  "/app": {
+    "target": "http://localhost:4000",
+    "secure": false
+  },
+  "/db": {
+    "target": "http://localhost:4000",
+    "secure": false
+  }
+}

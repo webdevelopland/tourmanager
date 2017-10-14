@@ -1,0 +1,63 @@
+<div id="index">
+  <mat-card class="header">
+
+    <div>
+      <mat-form-field class="from-field">
+        <mat-select placeholder="From" [(ngModel)]="selectFrom" name="from">
+          <mat-option *ngFor="let town of routing.towns" [value]="town">
+            {{ town }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="To" [(ngModel)]="selectTo" name="to">
+          <mat-option *ngFor="let town of routing.towns" [value]="town">
+            {{ town }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="radio">
+      <mat-radio-group [(ngModel)]="radio">
+        <mat-radio-button value="radio-cheap" class="cheap-radio">Cheapest</mat-radio-button>
+        <mat-radio-button value="radio-fast">Fastest</mat-radio-button>
+      </mat-radio-group>
+    </div>
+
+    <div class="button">
+      <button mat-raised-button color="primary" (click)="search()">Search</button>
+    </div>
+
+  </mat-card>
+  <div class="track" *ngIf="visible">
+    <mat-card class="path" *ngFor="let path of route">
+      <div class="title">
+        <span>{{path.from}} > {{path.to}}</span>
+      </div>
+      <div class="price">
+        <span>{{path.cost}}</span>
+      </div>
+      <div class="about">
+        <span>{{path.about}}</span>
+      </div>
+    </mat-card>
+
+    <mat-card class="total">
+      <div class="title">
+        <span>Total</span>
+      </div>
+      <div class="duration">
+        <span>{{total.duration}}</span>
+      </div>
+      <div class="price">
+        <span>{{total.cost}}</span>
+      </div>
+    </mat-card>
+
+    <div class="button">
+      <button mat-raised-button color="primary" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</div>

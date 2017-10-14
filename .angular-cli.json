@@ -1,0 +1,61 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "project": {
+    "name": "angular-cli"
+  },
+  "apps": [
+    {
+      "root": "front-end",
+      "outDir": "front-end/dist",
+      "deployUrl": "dist",
+      "assets": [],
+      "index": "app/bootstrap/index.html",
+      "main": "app/bootstrap/angular.bootstrap.ts",
+      "polyfills": "dev/polyfills.ts",
+      "test": "dev/unit/test.ts",
+      "tsconfig": "app/tsconfig.app.json",
+      "testTsconfig": "app/tsconfig.spec.json",
+      "prefix": "app",
+      "environmentSource": "app/bootstrap/environments/environment.ts",
+      "environments": {
+        "dev": "app/bootstrap/environments/environment.ts",
+        "prod": "app/bootstrap/environments/environment.prod.ts"
+      },
+      "styles": [
+        "app/styles/css/app.css"
+      ],
+      "scripts": []
+    }
+  ],
+  "e2e": {
+    "protractor": {
+      "config": "./protractor.conf.js"
+    }
+  },
+  "lint": [
+    {
+      "project": "front-end/app/tsconfig/tsconfig.app.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "front-end/app/tsconfig/tsconfig.spec.json",
+      "exclude": "**/node_modules/**"
+    },
+    {
+      "project": "front-end/dev/e2e/tsconfig.e2e.json",
+      "exclude": "**/node_modules/**"
+    }
+  ],
+  "test": {
+    "karma": {
+      "config": "./karma.conf.js"
+    }
+  },
+  "defaults": {
+    "styleExt": "css",
+    "serve": {
+      "port": 8000
+    },
+    "component": {}
+  }
+}

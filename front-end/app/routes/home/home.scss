@@ -1,0 +1,87 @@
+#index {
+  >.header {
+    margin-bottom: 30px;
+    >div>.from-field {
+      margin-right: 60px;
+    }
+
+    >.radio {
+      margin-top: 10px;
+      .cheap-radio {
+        margin-right: 40px;
+      }
+    }
+
+    >.button {
+      margin-top: 30px;
+    }
+  }
+  >.track {
+    >mat-card {
+      margin-bottom: 10px;
+    }
+    $card-w: 350px;
+    >.path {
+      max-width: $card-w;
+      position: relative;
+      >.title {
+        span {
+          font-family: $default-font;
+          font-size: 24px;
+        }
+      }
+      >.price {
+        position: absolute;
+        top: 27px; right: 27px;
+        span {
+          font-family: $default-font;
+          font-size: 21px;
+        }
+      }
+      >.about {
+        margin-top: 8px;
+        span {
+          font-family: $default-font;
+          font-size: 16px;
+          color: #2F2F2F
+        }
+      }
+    }
+    >.total {
+      display: flex;
+      max-width: $card-w;
+      background: #FAFAFA;
+      >.title {
+        width: 33%;
+        display: flex;
+        justify-content: flex-start; align-items: center;
+        span {
+          font-family: $default-font;
+          font-size: 24px;
+        }
+      }
+      >.duration {
+        width: 33%;
+        display: flex;
+        justify-content: center; align-items: center;
+        span {
+          font-family: $default-font;
+          font-size: 16px;
+          color: #2F2F2F
+        }
+      }
+      >.price {
+        width: 33%;
+        display: flex;
+        justify-content: flex-end; align-items: center;
+        span {
+          font-family: $default-font;
+          font-size: 21px;
+        }
+      }
+    }
+    >.button {
+      margin-top: 20px;
+    }
+  }
+}

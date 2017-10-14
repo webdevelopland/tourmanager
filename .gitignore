@@ -1,0 +1,5 @@
+node_modules
+bower_components
+front-end/dist
+front-end/app/styles/css
+back-end/private
