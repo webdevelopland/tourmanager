@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { HttpService } from "@/services/http.service";
-import * as js from "libraryjs";
+import { not } from "libraryjs";
 import { Routing } from "./Routing";
 
 @Component({
@@ -29,8 +29,8 @@ export class HomePageComponent {
     this.http.get({
       url: "/db",
       callback: (res) => {
-        if (js.not(res)) return;
-        if (js.not(res.currency)) return;
+        if (not(res)) return;
+        if (not(res.currency)) return;
         this.routing.load(res);
       }
     });
@@ -43,7 +43,7 @@ export class HomePageComponent {
   }
 
   search() {
-    if (js.not(this.selectFrom) || js.not(this.selectTo)) {
+    if (not(this.selectFrom) || not(this.selectTo)) {
       alert ("Specify path");
       return;
     }

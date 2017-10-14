@@ -1,4 +1,4 @@
-import * as js from "libraryjs";
+import { not, Arc } from "libraryjs";
 
 export class Routing {
   deals:any;
@@ -102,8 +102,6 @@ export class Routing {
         this.fastMap[i][j] = fastCell[0];
       }
     }
-    // console.log(fullMap);
-    // console.log(this.fastMap);
   }
 
   cheapStart(from, to) {
@@ -117,20 +115,19 @@ export class Routing {
     });
   }
   private start(from, to, map, handler) {
-    this.path[from].size = undefined;
+    this.path[from].size = 0;
 
     var error = true;
     var open = (n) => {
       this.path[this.towns[n]].closed = true;
 
-      var line = new js.Arc();
+      var line = new Arc();
       for(let j in map[n]) {
         if (this.path[this.towns[j]].closed) continue;
-        if (js.not(map[n][j])) continue;
+        if (not(map[n][j])) continue;
 
-        // var cell = JSON.parse(JSON.stringify(map[n][j]));
         var cell = map[n][j];
-        var current = this.path[from].size + handler(cell);
+        var current = this.path[this.towns[n]].size + handler(cell);
 
         if (this.path[this.towns[j]].size === undefined || this.path[this.towns[j]].size > current) {
           this.path[this.towns[j]].size = current;
@@ -171,7 +168,7 @@ export class Routing {
       A = this.towns[this.path[B].from];
       
       
-      if (js.not(A)) break;
+      if (not(A)) break;
       var cell = this.path[B].cell;
       price += cell.price;
       min += cell.min;
