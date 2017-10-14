@@ -148,7 +148,6 @@ export class Routing {
     var open = (n) => {
       this.path[this.towns[n]].closed = true; //If we visited a town, no need to return
       var line = new Arc(); //Don't worry. It's just an associative array
-      // var line = [];
       for(let j in map[n]) {
         //Let's see all branches of the graph
         if (this.path[this.towns[j]].closed) continue; //that's mean we already was here. No need to calc anymore
@@ -162,8 +161,6 @@ export class Routing {
           this.path[this.towns[j]].from = n;
         }
         line.add(j, current);
-        // line.add(j, undefined);
-        // line.push(j);
       }
       // Choose most shortest
       line.sort((a, b) => {
@@ -171,7 +168,6 @@ export class Routing {
         else if (a.value > b.value) return 1;
         else return 0;
       });
-      // for(let k of line) {
       for(let k of line.names) {
         if (k === this.N[to]) {
           //We found destination. Is that shortest way? Let's check others

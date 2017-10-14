@@ -1,16 +1,17 @@
 {
   "name": "tourmanager",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Best way",
   "scripts": {
     "start": "node express.js",
     "serve": "ng serve --proxy-config front-end/dev/express.proxy.json",
-    "build": "ng build --prod --aot",
+    "prod": "ng build --prod --aot",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "scss": "gulp scss-auto",
     "express": "gulp express-auto",
+    "build": "concurrently \"gulp scss\" \"npm run prod\"",
     "unit": "concurrently \"npm run express\" \"npm run test\"",
     "dev": "concurrently \"npm run scss\" \"npm run serve\"",
     "devx": "concurrently \"npm run scss\" \"npm run express\" \"npm run serve\""
